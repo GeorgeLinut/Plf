@@ -1,0 +1,23 @@
+len([],0).
+len([_|T],R):-
+	len(T,R1),
+	R is R1+1.
+subsets([],[]).
+subsets([_|T],R):-
+	subsets(T,R).
+subsets([H|T],[H|R]):-
+	subsets(T,R).
+pro(L,R):-
+	findall(P,subsets(L,P),R).
+select([],_,[]).
+select([H|T],C,[H|P]):-
+	len(H,R1),
+	R1=:=C,
+	select(T,C,P).
+select([H|T],C,P):-
+	len(H,R1),
+	R1=\=C,
+	select(T,C,P).
+main(L,C,R):-
+	pro(L,R1),
+	select(R1,C,R).
